@@ -91,3 +91,73 @@ Exemples l.156, l.160, l.269, l.274
 
 - `Type FC` inutile dans les composants : préférer le typage direct des props
 - totalGamesEditions l.173 peut être déduit de olympicsData
+
+---
+## Architecture
+
+### Arborescence
+
+```text
+src/app/
+├── components/
+│   ├── Card.tsx
+│   └── Header.tsx
+│
+├── pages/
+│   ├── Dashboard.tsx
+│   └── Country.tsx
+│
+├── layouts/
+│   └── AppLayout.tsx
+│
+├── routes/
+│   └── AppRoutes.tsx
+│
+├── hooks/
+│   └── useData.ts
+│
+├── utils/
+│   ├── calcUtils.ts
+│   └── chartUtils.ts
+│
+├── data/
+│   └── olympicsData.ts
+│
+├── models/
+│   └── olympics.ts
+│
+└── App.tsx
+```
+
+### Schéma de données
+⇑ (flux de rendu/props)
+
+⇓ (flux de récupération des données)
+
+```text
+Composants
+    ⇑
+Pages
+    ⇑
+AppLayout [SMART]
+    ⇓
+hooks/useData.ts
+    ⇓
+data/olympicsData.ts (puis services/API)
+    ⇓
+Backend
+```
+
+**hooks**
+
+Cette séparation permet de découpler la récupération et la gestion des données de l'affichage. Les pages et composants restent principalement dédiés au rendu, tandis que useData constitue le point de contact avec les données. À terme, le remplacement de data/olympicsData.ts par un service/API pourra se faire sans modifier la logique d'affichage.
+
+**layout**
+
+Le layout récupère la donnée de l'API (aujourd'hui data) via le hook useData.
+La donnée est ainsi partagée entre les pages Dashboard et Country qui reçoivent les données depuis le layout.
+Les pages transmettent la donnée nécessaire à leurs composants.
+
+**utils**
+
+La logique métier et la préparation des données des graphiques sont extraites dans des fichiers utils dédiés, afin de séparer la logique de l'affichage.
