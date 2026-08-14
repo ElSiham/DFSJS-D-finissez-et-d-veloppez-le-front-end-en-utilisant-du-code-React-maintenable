@@ -3,7 +3,7 @@
 ### Arborescence
 
 ```text
-src/app/
+src/
 ├── components/
 │   ├── CardManager.tsx
 │   ├── ChartManager.tsx

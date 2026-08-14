@@ -11,9 +11,9 @@ const useData = () => {
   useEffect(() => {
     setTimeout(() => {
       setData(olympicsData)
-
-      setStatus('success')
-    }, 500)
+      if (!olympicsData.length) setStatus('empty')
+      else setStatus('success')
+    }, 1000)
   }, [])
 
   return { olympicsData, status }

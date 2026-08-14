@@ -1,3 +1,5 @@
+import type { ChartOptions } from 'chart.js'
+
 import { totalMedals } from './calcUtils'
 
 import type { OlympicsData, Country, Participation } from '../models/OlympicsData'
@@ -29,17 +31,29 @@ const pieChartData = (data: OlympicsData) => {
   }
 }
 
-const pieChartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      position: 'bottom' as const,
-      labels: {
-        color: 'white',
+const pieChartOptions = (callback: Function): ChartOptions<'pie'> => {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    onHover: (_event, _elements) => {
+      const target = _event.native?.target as HTMLElement
+
+      if (target) {
+        target.style.cursor = 'pointer'
+      }
+    },
+    onClick: (_event, elements) => {
+      callback(elements[0].index)
+    },
+    plugins: {
+      legend: {
+        position: 'bottom' as const,
+        labels: {
+          color: 'white',
+        },
       },
     },
-  },
+  }
 }
 
 const lineChartData = (participations: Participation[]) => {

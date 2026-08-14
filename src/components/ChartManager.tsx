@@ -40,10 +40,10 @@ const ChartManager = ({ type, data, options }: ChartManagerProps) => {
   const renderChart = () => {
     switch (type) {
       case 'line':
-        return <Line data={data} options={options} />
+        return <Line aria-label="Graphique des médailles par année" data={data} options={options} />
 
       case 'pie':
-        return <Pie data={data} options={options} />
+        return <Pie aria-label="Graphique des médailles par pays" data={data} options={options} />
 
       default:
         return null
@@ -51,10 +51,8 @@ const ChartManager = ({ type, data, options }: ChartManagerProps) => {
   }
 
   return (
-    <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
-      <div className="h-100">
-        {renderChart()}
-      </div>
+    <div className="bg-gray-800 p-8 rounded-lg shadow-xl h-100">
+      {renderChart()}
     </div>
   )
 }
