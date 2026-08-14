@@ -4,12 +4,14 @@ import AppLayout from '../layouts/AppLayout.tsx'
 
 import CountryPage from '../pages/CountryPage.tsx'
 import DashboardPage from '../pages/DashboardPage.tsx'
+import PageLoader from '../components/PageLoader.tsx'
 
 const AppRoutes = () => (
   <Routes>
     <Route element={<AppLayout />}>
       <Route path="/" element={<DashboardPage />} />
       <Route path="/country/:id" element={<CountryPage />} />
+      <Route path="*" element={<PageLoader status="error" />} />
     </Route>
   </Routes>
 )

@@ -14,6 +14,7 @@ Interactive web application to visualize historical performance data of countrie
 
 - **Node.js** 22 LTS or higher
 - **npm** (included with Node.js)
+- **vite** 7
 
 ## 🛠️ Installation
 
@@ -60,19 +61,40 @@ npm run lint
 
 ## 📁 Project Structure
 
-```
+```text
 p2-dfsjs/
-├── public/              # Static public assets
 ├── src/
-│   ├── App.tsx         # Main application component
-│   ├── main.tsx        # React entry point
-│   └── index.css       # Global styles
-├── index.html          # Main HTML page
-├── package.json        # Project dependencies
-├── tsconfig.json       # TypeScript configuration
-├── vite.config.ts      # Vite configuration
-├── tailwind.config.js  # Tailwind CSS configuration
-└── .eslintrc.cjs       # ESLint configuration
+│   ├── components/                 # Reusable UI components
+│   │   ├── CardManager.tsx
+│   │   ├── ChartManager.tsx
+│   │   ├── Header.tsx
+│   │   └── PageLoader.tsx
+│   ├── data/                       # Data source (currently local, future API)
+│   │   └── olympicsData.ts
+│   ├── hooks/                      # Data access hook
+│   │   └── useData.ts
+│   ├── layouts/                    # Global layouts
+│   │   └── AppLayout.tsx
+│   ├── models/                     # TypeScript models
+│   │   ├── olympicsData.ts
+│   │   └── Status.ts
+│   ├── pages/                      # Page components
+│   │   ├── CountryPage.tsx
+│   │   └── DashboardPage.tsx
+│   ├── routes/                     # Route configuration
+│   │   └── AppRoutes.tsx
+│   ├── utils/                      # Logic and data preparation
+│   │   ├── calcUtils.ts
+│   │   └── chartUtils.ts
+│   ├──  App.tsx                    # Main application component
+│   ├── main.tsx                    # React entry point
+│   └── index.css                   # Global styles
+├── index.html                      # Main HTML page
+├── package.json                    # Project dependencies
+├── tsconfig.json                   # TypeScript configuration
+├── vite.config.ts                  # Vite configuration
+├── tailwind.config.js              # Tailwind CSS configuration
+└── .eslintrc.cjs                   # ESLint configuration
 ```
 
 ## 🔧 Tech Stack

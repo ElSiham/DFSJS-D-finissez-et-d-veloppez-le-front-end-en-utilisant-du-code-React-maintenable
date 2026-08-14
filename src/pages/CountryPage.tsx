@@ -1,4 +1,4 @@
-import { useParams, useOutletContext } from 'react-router-dom'
+import { Link, useParams, useOutletContext } from 'react-router-dom'
 
 import { totalMedals, totalAthletes } from '../utils/calcUtils'
 import { lineChartData, lineChartOptions } from '../utils/chartUtils'
@@ -37,15 +37,23 @@ const CountryPage = () => {
 
   return (
     <div className="max-w-6xl mx-auto">
+      <p className="mb-5">
+        <Link to="/">&lt; Retour à la page d'accueil</Link>
+      </p>
       <Header headTitle={country.name} />
 
-      <CardManager cards={cards} />
-      <ChartManager
-        data={lineChartData(country.participations)}
-        options={lineChartOptions}
-        type="line"
-      />
-
+      <div className="flex flex-col lg:flex-row gap-2">
+        <div className='flex-1'>
+          <CardManager cards={cards} />
+        </div>
+        <div className='flex-1'>
+          <ChartManager
+            data={lineChartData(country.participations)}
+            options={lineChartOptions}
+            type="line"
+          />
+        </div>
+      </div>
       <div className="text-sm text-gray-400">
         <p>Données des 5 dernières éditions des Jeux Olympiques</p>
       </div>
